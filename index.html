@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistema de Reservas</title>
+  <link href="styles.css" rel="stylesheet" />
+</head>
+<body class="bg-white text-black font-sans">
+  <header class="bg-black text-dorado p-6 text-center">
+    <h1 class="text-3xl font-bold">Restaurante Sabor Dorado</h1>
+    <p>📍 Av. Libertador 1234, Buenos Aires | ☎️ 11 2345-6789</p>
+    <p>🕒 Abierto: Lunes a Sábado, 19:00 a 00:00</p>
+  </header>
+
+  <section class="p-6 max-w-2xl mx-auto">
+    <h2 class="text-2xl font-semibold mb-4">Reservá tu mesa</h2>
+    <form action="https://mi-n8n.vercel.app/webhook/reservas" method="POST" class="space-y-4">
+      <input type="text" name="nombre" placeholder="Nombre completo" required class="input" />
+      <input type="tel" name="telefono" placeholder="Teléfono o WhatsApp" required class="input" />
+      <input type="datetime-local" name="fecha_hora" required class="input" />
+      <input type="number" name="personas" placeholder="Cantidad de personas" required class="input" />
+      <input type="text" name="restricciones" placeholder="Restricciones alimentarias (opcional)" class="input" />
+      <button type="submit" class="btn">Reservar</button>
+    </form>
+    <p id="mensaje-confirmacion" class="mt-4 text-green-700 font-medium hidden">
+      ¡Gracias! Recibirás la confirmación luego de realizar la seña.
+    </p>
+  </section>
+
+  <section class="p-6 bg-gray-50">
+    <h2 class="text-xl font-semibold text-center mb-4">Nuestro ambiente y platos</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+      <img src="images/plato1.jpg" alt="Plato delicioso" class="rounded shadow" />
+      <img src="images/ambiente1.jpg" alt="Ambiente elegante" class="rounded shadow" />
+    </div>
+  </section>
+
+  <script>
+    const form = document.querySelector("form");
+    const mensaje = document.getElementById("mensaje-confirmacion");
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+      }).then(() => {
+        mensaje.classList.remove("hidden");
+        form.reset();
+      });
+    });
+  </script>
+</body>
+</html>

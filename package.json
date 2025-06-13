@@ -1,0 +1,13 @@
+{
+  "name": "sistema-reservas-restaurante",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "npx postcss src/input.css -o public/styles.css"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.5.5",
+    "postcss-cli": "^11.0.1",
+    "tailwindcss": "^3.3.0"
+  }
+}

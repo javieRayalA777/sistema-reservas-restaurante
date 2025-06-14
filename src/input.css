@@ -4,9 +4,27 @@
 
 @layer components {
   .input {
-    @apply w-full p-3 border rounded;
+    @apply w-full p-3 border rounded text-center text-lg;
   }
+
   .btn {
-    @apply bg-dorado text-black px-6 py-2 rounded font-semibold hover:brightness-110;
+    @apply bg-dorado text-black px-6 py-2 rounded font-semibold hover:brightness-110 transition-transform transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-dorado ring-offset-2;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in-up {
+    animation: fade-in-up 0.4s ease-out both;
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

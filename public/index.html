@@ -3,28 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sistema de Reservas</title>
+  <title>Reserver</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet" />
   <link href="styles.css" rel="stylesheet" />
 </head>
 <body class="bg-white text-black font-sans">
-  <header class="bg-black text-dorado p-6 text-center">
-    <h1 class="text-3xl font-bold">Restaurante Sabor Dorado</h1>
+
+  <header class="bg-black text-yellow-300 p-6 text-center">
+    <h1 class="text-4xl font-display tracking-wide">Reserver</h1>
     <p>📍 Av. Libertador 1234, Buenos Aires | ☎️ 11 2345-6789</p>
-    <p>🕒 Abierto: Lunes a Sábado, 19:00 a 00:00</p>
+    <p>🕒 Abierto: Todos los días, 19:00 a 00:00</p>
+    <p>Las reservas se toman hasta agotar mesas, luego es por orden de llegada</p>
   </header>
 
   <section class="p-6 max-w-2xl mx-auto">
-    <h2 class="text-2xl font-semibold mb-4">Reservá tu mesa</h2>
+    <h2 class="text-2xl font-bold text-center mb-4">Reservá tu mesa</h2>
+
     <form action="https://mi-n8n.vercel.app/webhook/reservas" method="POST" class="space-y-4">
       <input type="text" name="nombre" placeholder="Nombre completo" required class="input" />
       <input type="tel" name="telefono" placeholder="Teléfono o WhatsApp" required class="input" />
       <input type="datetime-local" name="fecha_hora" required class="input" />
       <input type="number" name="personas" placeholder="Cantidad de personas" required class="input" />
-      <input type="text" name="restricciones" placeholder="Restricciones alimentarias (opcional)" class="input" />
-      <button type="submit" class="btn">Reservar</button>
+      <input type="text" name="restricciones" placeholder="Restricciones alimentarias (Veg, Celíaco, Alérgico, Hipertenso)" class="input" />
+
+      <div class="flex justify-center">
+        <button type="submit" class="btn">Reservar</button>
+      </div>
     </form>
-    <p id="mensaje-confirmacion" class="mt-4 text-green-700 font-medium hidden">
-      ¡Gracias! Recibirás la confirmación luego de realizar la seña.
+
+    <p id="mensaje-confirmacion" class="mt-6 hidden text-center opacity-0 transition-opacity duration-500">
+      <!-- Se rellena dinámicamente con JavaScript -->
     </p>
   </section>
 
@@ -36,19 +44,6 @@
     </div>
   </section>
 
-  <script>
-    const form = document.querySelector("form");
-    const mensaje = document.getElementById("mensaje-confirmacion");
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      fetch(form.action, {
-        method: "POST",
-        body: new FormData(form),
-      }).then(() => {
-        mensaje.classList.remove("hidden");
-        form.reset();
-      });
-    });
-  </script>
+  <script src="main.js"></script>
 </body>
 </html>
